@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · CampusConnect</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="CSS/signin.css">
+</head>
+<body>
+<main class="login-page">
+  <div class="login-wrap">
+    <div class="site-name">CampusConnect</div>
+    <p class="page-note">Log in to view and report campus issues.</p>
+    <form class="form-box" id="form" novalidate>
+      <h1>Sign in</h1>
+      <label for="email">College email</label>
+      <input id="email" type="email" autocomplete="email">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" autocomplete="current-password">
+      <p class="message-error" id="err" role="alert"></p>
+      <button class="button wide-button">Sign in</button>
+      <p class="form-link">New here? <a href="signup.html">Create an account</a></p>
+      <p class="small-note" style="text-align:center">Demo: Demo@campus.edu / demo1234</p>
+    </form>
+  </div>
+</main>
+<script src="JS/signup.js"></script>
+</body>
+</html>
