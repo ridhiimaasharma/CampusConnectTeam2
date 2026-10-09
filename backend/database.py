@@ -17,6 +17,6 @@ def init_db():
             password_hash TEXT NOT NULL
         )
     """)
-    # Add the issues table here: copy its CREATE TABLE from your teammate's code
+    
     conn.commit()
     conn.close()
