@@ -1,58 +1,33 @@
-const mem = {};
-const store = {
-  get(k, d) {
-    try {
-      const v = localStorage.getItem("cc_" + k);
-      if (v !== null) return JSON.parse(v);
-    } catch (e) {}
-    return k in mem ? mem[k] : d;
-  },
-  set(k, v) {
-    mem[k] = v;
-    try {
-      localStorage.setItem("cc_" + k, JSON.stringify(v));
-    } catch (e) {}
-  },
-};
+const API = "http://127.0.0.1:8000";
+const form = document.querySelector("#form");
+const err = document.querySelector("#err");
 
-if (!store.get("users", null)) {
-  store.set("users", [
-    {
-      id: "u0",
-      name: "Demo User",
-      email: "Demo@campus.edu", 
-      password: "demo1234"
-    },
-  ]);
-}
-
-
-const getUsers = () => store.get("users", []);
-const $ = (s) => document.querySelector(s);
-
-const form = $("#form"),
-  err = $("#err");
-  
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   err.textContent = "";
-  const email = $("#email").value.trim().toLowerCase(),
-    password = $("#pw").value;
-    
+
+  const email = document.querySelector("#email").value.trim().toLowerCase();
+  const password = document.querySelector("#pw").value;
+
   if (!email || !password) {
     err.textContent = "Please enter your email and password.";
     return;
   }
-  
-  const user = getUsers().find(
-    (u) => u.email.toLowerCase() === email && u.password === password,
-  );
-  
-  if (!user) {
-    err.textContent = "Incorrect email or password.";
-    return;
+
+  try {
+    const res = await fetch(API + "/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      err.textContent = typeof data.detail === "string" ? data.detail : "Login failed.";
+      return;
+    }
+    localStorage.setItem("user", JSON.stringify(data)); // {id, name, email}
+    location.href = "dashboard.html";
+  } catch (error) {
+    err.textContent = "Cannot reach the server. Is the backend running?";
   }
-  
-  store.set("session", user.id);
-  location.href = "dashboard.html";
 });
