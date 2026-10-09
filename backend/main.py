@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from database import get_connection, init_db
-# from issues import router as issues_router   # uncomment once issues.py exists
+from issues import router as issues_router   
 
 app = FastAPI()
 
@@ -16,7 +16,7 @@ app.add_middleware(
 )
 
 init_db()
-# app.include_router(issues_router)             # uncomment with the import above
+app.include_router(issues_router)
 
 
 class RegisterRequest(BaseModel):
@@ -32,6 +32,13 @@ class LoginRequest(BaseModel):
 
 @app.post("/register")
 def register(data: RegisterRequest):
+    @app.post("/register")
+def register(data: RegisterRequest):
+
+    if not data.name.strip() or not data.email.strip() or not data.password.strip():
+        raise HTTPException(status_code=400, detail="All fields are required")
+
+    hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt())
     hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt()).decode()
     conn = get_connection()
     try:
