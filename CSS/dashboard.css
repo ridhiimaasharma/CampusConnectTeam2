@@ -1,0 +1,382 @@
+:root {
+    --backgroundColor: #f4ecdc;
+    --card: #fbf7ee;
+    --textColor: #1d2b24;
+    --smallnote: #66736b;
+    --line: #ddd2ba;
+
+    --accentColor: #047857;
+    --accentColor-d: #065f46;
+    --accentColor-l: #d5ecdf;
+
+    --secColor: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--backgroundColor);
+    color: var(--textColor);
+    font: 16px/1.55 Figtree, system-ui, -apple-system,
+        "Segoe UI", sans-serif;
+}
+
+
+/* =========================
+   TOP NAVIGATION
+   ========================= */
+
+.topbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 7%;
+
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+}
+
+.site-name {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.navigation a {
+    color: var(--textColor);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.navigation a:hover {
+    color: var(--accentColor);
+}
+
+.navigation a.active {
+    color: var(--accentColor);
+    font-weight: 700;
+}
+
+
+/* =========================
+   MAIN DASHBOARD
+   ========================= */
+
+.dashboard-page {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+    padding: 55px 0 70px;
+}
+
+
+/* Dashboard heading */
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 8px;
+    font-size: 38px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.dashboard-header p {
+    margin: 0;
+    color: var(--smallnote);
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.button {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    border-radius: 9px;
+
+    background: var(--accentColor);
+    color: white;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    border: none;
+
+    transition: 0.2s ease;
+}
+
+.button:hover {
+    background: var(--accentColor-d);
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   STATISTICS
+   ========================= */
+
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    background: var(--card);
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--accentColor);
+}
+
+.stat-label {
+    color: var(--smallnote);
+    font-size: 14px;
+}
+
+
+/* =========================
+   SECTION HEADING
+   ========================= */
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    margin: 0 0 5px;
+    font-size: 25px;
+}
+
+.section-heading p {
+    margin: 0;
+    color: var(--smallnote);
+}
+
+
+/* =========================
+   ISSUE GRID
+   ========================= */
+
+.issues-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+
+/* =========================
+   ISSUE CARD
+   ========================= */
+
+.issue-card {
+    background: var(--card);
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 245px;
+
+    transition: 0.2s ease;
+}
+
+.issue-card:hover {
+    transform: translateY(-3px);
+    border-color: #cbbf9f;
+}
+
+.issue-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+
+/* Category */
+
+.category {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: var(--accentColor-l);
+    color: var(--accentColor-d);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   STATUS
+   ========================= */
+
+.status {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-open {
+    background: #e8f5e9;
+    color: #287a32;
+}
+
+.status-progress {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-resolved {
+    background: #dff3ea;
+    color: #176b4b;
+}
+
+
+/* =========================
+   ISSUE CONTENT
+   ========================= */
+
+.issue-card h3 {
+    margin: 0 0 9px;
+    font-size: 20px;
+}
+
+.issue-card > p {
+    margin: 0;
+
+    color: var(--smallnote);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   CARD BOTTOM
+   ========================= */
+
+.issue-card-bottom {
+    margin-top: auto;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    font-size: 12px;
+    color: var(--smallnote);
+}
+
+.issue-card-bottom a {
+    color: var(--accentColor);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.issue-card-bottom a:hover {
+    color: var(--accentColor-d);
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .stats-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .issues-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .navigation {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-header h1 {
+        font-size: 31px;
+    }
+
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+
+    .issues-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

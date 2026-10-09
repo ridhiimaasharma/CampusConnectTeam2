@@ -1,0 +1,333 @@
+:root {
+    --backgroundColor: #f4ecdc;
+    --card: #fbf7ee;
+    --textColor: #1d2b24;
+    --smallnote: #66736b;
+    --line: #ddd2ba;
+
+    --accentColor: #047857;
+    --accentColor-d: #065f46;
+    --accentColor-l: #d5ecdf;
+
+    --error: #b3261e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--backgroundColor);
+    color: var(--textColor);
+
+    font: 16px/1.55 Figtree, system-ui, -apple-system,
+        "Segoe UI", sans-serif;
+}
+
+
+/* =========================
+   TOP NAVIGATION
+   ========================= */
+
+.topbar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 7%;
+
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+}
+
+.site-name {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.navigation a {
+    color: var(--textColor);
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.navigation a:hover {
+    color: var(--accentColor);
+}
+
+.navigation a.active {
+    color: var(--accentColor);
+    font-weight: 700;
+}
+
+
+/* =========================
+   MAIN PAGE
+   ========================= */
+
+.create-page {
+    width: min(760px, 90%);
+    margin: 0 auto;
+
+    padding: 55px 0 70px;
+}
+
+
+/* =========================
+   HEADING
+   ========================= */
+
+.page-heading {
+    margin-bottom: 30px;
+}
+
+.page-heading h1 {
+    margin: 0 0 8px;
+
+    font-size: 36px;
+    line-height: 1.2;
+
+    letter-spacing: -1px;
+}
+
+.page-heading p {
+    margin: 0;
+
+    color: var(--smallnote);
+}
+
+
+/* =========================
+   FORM CONTAINER
+   ========================= */
+
+.form-container {
+    background: var(--card);
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+
+    padding: 32px;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.issue-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 23px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   INPUTS
+   ========================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--line);
+    border-radius: 8px;
+
+    background: var(--secColor);
+    color: var(--textColor);
+
+    font: inherit;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #8a918b;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--accentColor);
+
+    box-shadow: 0 0 0 3px var(--accentColor-l);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+
+/* =========================
+   MESSAGE
+   ========================= */
+
+.form-message {
+    min-height: 22px;
+
+    margin: -5px 0 0;
+
+    font-size: 14px;
+}
+
+.form-message.error {
+    color: var(--error);
+}
+
+.form-message.success {
+    color: var(--accentColor-d);
+}
+
+
+/* =========================
+   FORM BUTTONS
+   ========================= */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 8px;
+}
+
+
+/* Submit button */
+
+.button {
+    display: inline-block;
+
+    padding: 12px 21px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: var(--accentColor);
+    color: white;
+
+    text-decoration: none;
+
+    font: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.button:hover {
+    background: var(--accentColor-d);
+
+    transform: translateY(-1px);
+}
+
+
+/* Cancel button */
+
+.cancel-button {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    border: 1px solid var(--line);
+    border-radius: 9px;
+
+    background: transparent;
+    color: var(--textColor);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.cancel-button:hover {
+    background: #f1eadb;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+@media (max-width: 650px) {
+
+    .topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .navigation {
+        flex-wrap: wrap;
+
+        gap: 15px;
+    }
+
+    .create-page {
+        width: 92%;
+
+        padding-top: 35px;
+    }
+
+    .form-container {
+        padding: 22px;
+    }
+
+    .page-heading h1 {
+        font-size: 30px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .button,
+    .cancel-button {
+        width: 100%;
+
+        text-align: center;
+    }
+}

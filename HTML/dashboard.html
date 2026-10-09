@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard · CampusConnect</title>
+
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="topbar">
+
+        <div class="site-name">
+            CampusConnect
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="create-issue.html">
+                Report Issue
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="signin.html">
+                Sign out
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-page">
+
+        <!-- Dashboard Heading -->
+        <section class="dashboard-header">
+
+            <div>
+                <h1>Campus Issues</h1>
+
+                <p>
+                    View and track reported issues around your campus.
+                </p>
+            </div>
+
+            <a href="create-issue.html" class="button">
+                + Report an Issue
+            </a>
+
+        </section>
+
+
+        <!-- Issue Statistics -->
+        <section class="stats-section">
+
+            <div class="stat-card">
+                <span class="stat-number" id="totalIssues">0</span>
+                <span class="stat-label">Total Issues</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-number" id="openIssues">0</span>
+                <span class="stat-label">Open</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-number" id="progressIssues">0</span>
+                <span class="stat-label">In Progress</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-number" id="resolvedIssues">0</span>
+                <span class="stat-label">Resolved</span>
+            </div>
+
+        </section>
+
+
+        <!-- Recent Issues -->
+        <section class="issues-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Recent Issues</h2>
+
+                    <p>
+                        Latest issues reported by students.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Issues will appear here -->
+            <div class="issues-grid" id="issuesList">
+
+                <!-- Demo Issue 1 -->
+                <article class="issue-card">
+
+                    <div class="issue-card-top">
+
+                        <span class="category">
+                            Classroom
+                        </span>
+
+                        <span class="status status-open">
+                            Open
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Fan not working
+                    </h3>
+
+                    <p>
+                        The fan in Room 204 is not working properly.
+                    </p>
+
+                    <div class="issue-card-bottom">
+
+                        <span>
+                            Submitted by Student
+                        </span>
+
+                        <a href="issue-details.html">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Demo Issue 2 -->
+                <article class="issue-card">
+
+                    <div class="issue-card-top">
+
+                        <span class="category">
+                            Campus
+                        </span>
+
+                        <span class="status status-progress">
+                            In Progress
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Wi-Fi not working
+                    </h3>
+
+                    <p>
+                        Wi-Fi connection is unavailable in the library.
+                    </p>
+
+                    <div class="issue-card-bottom">
+
+                        <span>
+                            Submitted by Student
+                        </span>
+
+                        <a href="issue-details.html">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Demo Issue 3 -->
+                <article class="issue-card">
+
+                    <div class="issue-card-top">
+
+                        <span class="category">
+                            Lost &amp; Found
+                        </span>
+
+                        <span class="status status-resolved">
+                            Resolved
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Lost ID Card
+                    </h3>
+
+                    <p>
+                        A student has reported a lost university ID card.
+                    </p>
+
+                    <div class="issue-card-bottom">
+
+                        <span>
+                            Submitted by Student
+                        </span>
+
+                        <a href="issue-details.html">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Dashboard JavaScript -->
+    <script src="../JS/dashboard.js"></script>
+
+</body>
+
+</html>

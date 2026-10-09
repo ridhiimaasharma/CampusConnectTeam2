@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Issue Details · CampusConnect</title>
+
+    <link rel="stylesheet" href="../CSS/issue-details.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="topbar">
+
+        <div class="site-name">
+            CampusConnect
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="create-issue.html">
+                Report Issue
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="signin.html">
+                Sign out
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="details-page">
+
+        <a href="dashboard.html" class="back-link">
+            ← Back to Dashboard
+        </a>
+
+
+        <section class="details-card">
+
+            <!-- Issue Header -->
+            <div class="issue-header">
+
+                <div>
+
+                    <span class="category" id="issueCategory">
+                        Classroom
+                    </span>
+
+                    <h1 id="issueTitle">
+                        Fan not working
+                    </h1>
+
+                    <p class="issue-meta" id="issueDate">
+                        Reported by Student
+                    </p>
+
+                </div>
+
+                <span class="status status-open" id="issueStatus">
+                    Open
+                </span>
+
+            </div>
+
+
+            <!-- Issue Description -->
+            <div class="details-section">
+
+                <h2>Description</h2>
+
+                <p id="issueDescription">
+                    The fan in Room 204 is not working properly.
+                </p>
+
+            </div>
+
+
+            <!-- Issue Information -->
+            <div class="details-section">
+
+                <h2>Issue Information</h2>
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Category
+                        </span>
+
+                        <span id="infoCategory">
+                            Classroom
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Status
+                        </span>
+
+                        <span id="infoStatus">
+                            Open
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Reported By
+                        </span>
+
+                        <span id="infoSubmittedBy">
+                            Student
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="details-actions">
+
+                <a href="dashboard.html" class="button secondary-button">
+                    Back to Dashboard
+                </a>
+
+                <a href="create-issue.html" class="button">
+                    Report Another Issue
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../JS/issue-details.js"></script>
+
+</body>
+
+</html>
