@@ -32,13 +32,11 @@ class LoginRequest(BaseModel):
 
 @app.post("/register")
 def register(data: RegisterRequest):
-    @app.post("/register")
-def register(data: RegisterRequest):
+   
 
     if not data.name.strip() or not data.email.strip() or not data.password.strip():
         raise HTTPException(status_code=400, detail="All fields are required")
 
-    hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt())
     hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt()).decode()
     conn = get_connection()
     try:
