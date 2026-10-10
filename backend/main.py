@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from .database import get_connection, init_db
 from .issues import router as issues_router
+
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
