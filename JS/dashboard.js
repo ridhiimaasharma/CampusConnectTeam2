@@ -1,127 +1,67 @@
-// =========================
-// CAMPUSCONNECT DASHBOARD
-// =========================
-
-// Demo issues
-const issues = [
-    {
-        id: 1,
-        title: "Fan not working",
-        description: "The fan in Room 204 is not working properly.",
-        category: "Classroom",
-        status: "Open",
-        submittedBy: "Student"
-    },
-
-    {
-        id: 2,
-        title: "Wi-Fi not working",
-        description: "Wi-Fi connection is unavailable in the library.",
-        category: "Campus",
-        status: "In Progress",
-        submittedBy: "Student"
-    },
-
-    {
-        id: 3,
-        title: "Lost ID Card",
-        description: "A student has reported a lost university ID card.",
-        category: "Lost & Found",
-        status: "Resolved",
-        submittedBy: "Student"
-    }
-];
-
-
-// =========================
-// GET HTML ELEMENTS
-// =========================
+const API = "http://127.0.0.1:8000";
 
 const issuesList = document.getElementById("issuesList");
-
 const totalIssues = document.getElementById("totalIssues");
 const openIssues = document.getElementById("openIssues");
 const progressIssues = document.getElementById("progressIssues");
 const resolvedIssues = document.getElementById("resolvedIssues");
 
-
-// =========================
-// UPDATE STATISTICS
-// =========================
-
-function updateStatistics() {
-
-    totalIssues.textContent = issues.length;
-
-    openIssues.textContent =
-        issues.filter(issue => issue.status === "Open").length;
-
-    progressIssues.textContent =
-        issues.filter(issue => issue.status === "In Progress").length;
-
-    resolvedIssues.textContent =
-        issues.filter(issue => issue.status === "Resolved").length;
+let user = null;
+try {
+    user = JSON.parse(localStorage.getItem("user"));
+} catch (error) {
+    user = null;
 }
 
+function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
 
-// =========================
-// DISPLAY ISSUES
-// =========================
+function submittedByName(issue) {
+    if (user && issue.created_by === user.id) return user.name;
+    return "Student #" + issue.created_by;
+}
 
-function displayIssues() {
+function updateStatistics(issues) {
+    totalIssues.textContent = issues.length;
+    openIssues.textContent = issues.filter(issue => issue.status === "Open").length;
+    progressIssues.textContent = issues.filter(issue => issue.status === "In Progress").length;
+    resolvedIssues.textContent = issues.filter(issue => issue.status === "Resolved").length;
+}
 
+function displayIssues(issues) {
     issuesList.innerHTML = "";
 
+    if (issues.length === 0) {
+        issuesList.innerHTML = "<p>No issues reported yet.</p>";
+        return;
+    }
+
     issues.forEach(issue => {
-
         const article = document.createElement("article");
-
         article.className = "issue-card";
 
         let statusClass = "";
-
         if (issue.status === "Open") {
             statusClass = "status-open";
-        }
-        else if (issue.status === "In Progress") {
+        } else if (issue.status === "In Progress") {
             statusClass = "status-progress";
-        }
-        else if (issue.status === "Resolved") {
+        } else if (issue.status === "Resolved") {
             statusClass = "status-resolved";
         }
 
-
         article.innerHTML = `
             <div class="issue-card-top">
-
-                <span class="category">
-                    ${issue.category}
-                </span>
-
-                <span class="status ${statusClass}">
-                    ${issue.status}
-                </span>
-
+                <span class="category">${escapeHtml(issue.category)}</span>
+                <span class="status ${statusClass}">${escapeHtml(issue.status)}</span>
             </div>
-
-            <h3>
-                ${issue.title}
-            </h3>
-
-            <p>
-                ${issue.description}
-            </p>
-
+            <h3>${escapeHtml(issue.title)}</h3>
+            <p>${escapeHtml(issue.description)}</p>
             <div class="issue-card-bottom">
-
-                <span>
-                    Submitted by ${issue.submittedBy}
-                </span>
-
-                <a href="issue-details.html?id=${issue.id}">
-                    View Details →
-                </a>
-
+                <span>Submitted by ${escapeHtml(submittedByName(issue))}</span>
+                <a href="issue-details.html?id=${issue.id}">View Details →</a>
             </div>
         `;
 
@@ -129,10 +69,24 @@ function displayIssues() {
     });
 }
 
+async function loadIssues() {
+    if (!user) {
+        window.location.href = "../signin.html";
+        return;
+    }
 
-// =========================
-// START DASHBOARD
-// =========================
+    try {
+        const response = await fetch(API + "/issues");
+        if (!response.ok) {
+            issuesList.innerHTML = "<p>Could not load issues.</p>";
+            return;
+        }
+        const issues = await response.json();
+        updateStatistics(issues);
+        displayIssues(issues);
+    } catch (error) {
+        issuesList.innerHTML = "<p>Cannot reach the server. Is the backend running?</p>";
+    }
+}
 
-updateStatistics();
-displayIssues();
+loadIssues();
