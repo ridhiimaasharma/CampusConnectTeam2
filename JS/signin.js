@@ -26,7 +26,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
     localStorage.setItem("user", JSON.stringify(data)); // {id, name, email}
-    location.href = "dashboard.html";
+    location.href = "HTML/dashboard.html";
   } catch (error) {
     err.textContent = "Cannot reach the server. Is the backend running?";
   }
