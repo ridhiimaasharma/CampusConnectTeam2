@@ -3,8 +3,11 @@ import bcrypt
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from database import get_connection, init_db
-from issues import router as issues_router
+from .database import get_connection, init_db
+from .issues import router as issues_router
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
 
 app = FastAPI()
 
@@ -73,3 +76,21 @@ def me(user_id: int):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return dict(user)
+# Serve frontend files
+frontend_path = os.path.join(os.path.dirname(__file__), "..")
+
+app.mount("/CSS", StaticFiles(directory=os.path.join(frontend_path, "CSS")), name="css")
+app.mount("/JS", StaticFiles(directory=os.path.join(frontend_path, "JS")), name="js")
+app.mount("/HTML", StaticFiles(directory=os.path.join(frontend_path, "HTML")), name="html")
+
+@app.get("/")
+async def serve_home():
+    return FileResponse(os.path.join(frontend_path, "signin.html"))
+
+@app.get("/signin.html")
+async def serve_signin():
+    return FileResponse(os.path.join(frontend_path, "signin.html"))
+
+@app.get("/signup.html")
+async def serve_signup():
+    return FileResponse(os.path.join(frontend_path, "signup.html"))

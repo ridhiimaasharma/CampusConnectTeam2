@@ -1,0 +1,13 @@
+version: "3"
+agent:
+  authtoken: 3KUrBYz2NaVenKi3RKkLyAOUuFP_3S8Zsk2PZH3Ufe9M6kzDa
+
+endpoints:
+  - name: frontend
+    url: http://localhost:5501
+    upstream:
+      url: http://localhost:5501
+  - name: backend
+    url: http://localhost:8000
+    upstream:
+      url: http://localhost:8000

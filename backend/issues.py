@@ -1,18 +1,10 @@
-import sqlite3
+from .database import get_connection
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 router = APIRouter()
-DB_FILE = "campusconnect.db"
 
 STATUSES = ["Open", "In Progress", "Resolved"]
-
-
-def get_connection():
-    conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row
-    return conn
-
 
 def create_issues_table():
     conn = get_connection()
