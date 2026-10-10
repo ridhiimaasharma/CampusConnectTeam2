@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = (location.port === "5500" || location.port === "5501") ? "http://127.0.0.1:8000" : location.origin;
 
 const issuesList = document.getElementById("issuesList");
 const totalIssues = document.getElementById("totalIssues");
