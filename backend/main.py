@@ -3,8 +3,8 @@ import bcrypt
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from database import get_connection, init_db
-from issues import router as issues_router
+from .database import get_connection, init_db
+from .issues import router as issues_router
 
 app = FastAPI()
 
