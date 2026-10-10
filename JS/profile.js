@@ -1,155 +1,71 @@
-// =========================
-// CAMPUSCONNECT - PROFILE
-// =========================
+const API = "http://127.0.0.1:8000";
 
+const profileName = document.getElementById("profileName");
+const profileEmail = document.getElementById("profileEmail");
+const profileAvatar = document.getElementById("profileAvatar");
+const infoName = document.getElementById("infoName");
+const infoEmail = document.getElementById("infoEmail");
+const myIssues = document.getElementById("myIssues");
 
-// Profile elements
-
-const profileName =
-    document.getElementById("profileName");
-
-const profileEmail =
-    document.getElementById("profileEmail");
-
-const profileAvatar =
-    document.getElementById("profileAvatar");
-
-const infoName =
-    document.getElementById("infoName");
-
-const infoEmail =
-    document.getElementById("infoEmail");
-
-const myIssues =
-    document.getElementById("myIssues");
-
-
-// Default user
-
-let user = {
-    name: "Student",
-    email: "student@campus.edu"
-};
-
-
-// Try to get logged-in user
-
+let user = null;
 try {
+    user = JSON.parse(localStorage.getItem("user"));
+} catch (error) {
+    user = null;
+}
 
-    const savedUser =
-        localStorage.getItem("cc_currentUser");
+function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
 
-    if (savedUser) {
-
-        user = JSON.parse(savedUser);
-
+async function loadProfile() {
+    if (!user) {
+        window.location.href = "../signin.html";
+        return;
     }
 
-}
-catch (error) {
-
-    console.log("Could not load user information.");
-
-}
-
-
-// Display user information
-
-profileName.textContent =
-    user.name;
-
-profileEmail.textContent =
-    user.email;
-
-infoName.textContent =
-    user.name;
-
-infoEmail.textContent =
-    user.email;
-
-
-// Create avatar letter
-
-if (user.name) {
-
-    profileAvatar.textContent =
-        user.name.charAt(0).toUpperCase();
-
-}
-
-
-// Load reported issues
-
-let issues = [];
-
-try {
-
-    const savedIssues =
-        localStorage.getItem("campusConnectIssues");
-
-    if (savedIssues) {
-
-        issues = JSON.parse(savedIssues);
-
+    profileName.textContent = user.name;
+    profileEmail.textContent = user.email;
+    infoName.textContent = user.name;
+    infoEmail.textContent = user.email;
+    if (user.name) {
+        profileAvatar.textContent = user.name.charAt(0).toUpperCase();
     }
 
-}
-catch (error) {
+    let issues = [];
+    try {
+        const response = await fetch(API + "/issues");
+        if (response.ok) {
+            const allIssues = await response.json();
+            issues = allIssues.filter(issue => issue.created_by === user.id);
+        }
+    } catch (error) {
+        myIssues.innerHTML = `<p class="empty-message">Cannot reach the server. Is the backend running?</p>`;
+        return;
+    }
 
-    console.log("Could not load issues.");
-
-}
-
-
-// Display issues
-
-if (issues.length === 0) {
-
-    myIssues.innerHTML = `
-        <p class="empty-message">
-            No issues reported yet.
-        </p>
-    `;
-
-}
-else {
+    if (issues.length === 0) {
+        myIssues.innerHTML = `<p class="empty-message">No issues reported yet.</p>`;
+        return;
+    }
 
     myIssues.innerHTML = "";
-
     issues.forEach(function (issue) {
-
-        const issueItem =
-            document.createElement("div");
-
-        issueItem.className =
-            "issue-item";
-
+        const issueItem = document.createElement("div");
+        issueItem.className = "issue-item";
         issueItem.innerHTML = `
-
             <div class="issue-item-top">
-
                 <div>
-
-                    <h3>
-                        ${issue.title}
-                    </h3>
-
-                    <p>
-                        ${issue.category}
-                    </p>
-
+                    <h3>${escapeHtml(issue.title)}</h3>
+                    <p>${escapeHtml(issue.category)}</p>
                 </div>
-
-                <span class="issue-status">
-                    ${issue.status}
-                </span>
-
+                <span class="issue-status">${escapeHtml(issue.status)}</span>
             </div>
-
         `;
-
         myIssues.appendChild(issueItem);
-
     });
-
 }
+
+loadProfile();
