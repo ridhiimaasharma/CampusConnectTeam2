@@ -44,3 +44,21 @@ form.addEventListener("submit", async (e) => {
     err.textContent = "Cannot reach the server. Is the backend running?";
   }
 });
+// Sign out: clear the saved login and go to the sign-in page
+document.querySelectorAll("a, button").forEach(function (el) {
+    const text = el.textContent.trim().toLowerCase();
+    if (text === "sign out" || text === "log out" || text === "logout" || text === "signout") {
+        el.addEventListener("click", function (event) {
+            event.preventDefault();
+            localStorage.removeItem("user");
+            window.location.replace("../signin.html");
+        });
+    }
+});
+
+// Back button: if the page comes back from the browser's memory, check the login again
+window.addEventListener("pageshow", function () {
+    if (!localStorage.getItem("user")) {
+        window.location.replace("../signin.html");
+    }
+});
