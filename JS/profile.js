@@ -72,7 +72,7 @@ loadProfile();
 // Sign out: clear the saved login and go to the sign-in page
 document.querySelectorAll("a, button").forEach(function (el) {
     const text = el.textContent.trim().toLowerCase();
-    if (text === "sign out" || text === "log out" || text === "logout" || text === "signout") {
+    if (text.includes("sign out") || text.includes("log out") || text.includes("logout") || text.includes("signout")) {
         el.addEventListener("click", function (event) {
             event.preventDefault();
             localStorage.removeItem("user");
