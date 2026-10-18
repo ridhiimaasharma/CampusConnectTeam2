@@ -102,7 +102,7 @@ The database file `campusconnect.db` is created automatically inside `backend/` 
 ## Limitations and next steps
 
 - No real authentication yet: the backend does not check who is calling it, so anyone can create issues or change statuses by calling the API directly. The sign-in redirect is a browser-side check only.
-- - Login doesn't use tokens or sessions. The profile endpoint takes `user_id` in the URL (`/me?user_id=1`), so anyone could view another user's profile by changing the number.
+- Login doesn't use tokens or sessions. The profile endpoint takes `user_id` in the URL (`/me?user_id=1`), so anyone could view another user's profile by changing the number.
 - Passwords are stored hashed (bcrypt), never as plain text.
 - SQLite on free hosting may reset when the server restarts.
 - Ideas for next: JWT login, admin role, image upload for issues.
