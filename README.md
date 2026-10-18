@@ -1,12 +1,24 @@
 # CampusConnect
+**Live demo:** https://campusconnectteam2.onrender.com
+
+First load may take up to a minute (free hosting)
 
 A simple web app where students can report and view common issues around their college campus.
 
-Built for Code2Chill Weekly Project 01.
+Built as a team project for Code2Chill Weekly Project 01.
 
 ## Project Idea
 
 Students often face small problems on campus, like a broken fan, a Wi-Fi problem or a lost ID card. CampusConnect gives students one place to report these issues, see what has been reported, and track whether each issue has been fixed.
+
+<img width="1920" height="917" alt="signin" src="https://github.com/user-attachments/assets/29d52686-ffe0-450b-9cff-43bc5a145eae" />
+
+
+<img width="1871" height="912" alt="homepage" src="https://github.com/user-attachments/assets/6a41d596-8b99-42b1-93ef-215b42677d19" />
+
+
+<img width="1887" height="897" alt="report" src="https://github.com/user-attachments/assets/e946c9f9-77a9-4d1e-ad54-0c051be05b35" />
+
 
 ## Features
 
@@ -87,7 +99,10 @@ The database file `campusconnect.db` is created automatically inside `backend/` 
 | Mansehajdeep | mansehajdeep0214 | Sign-in and sign-up pages, connected to the backend |
 | Jaslagan Kaur | jaslagankaur | Dashboard, create issue, issue details and profile pages (HTML and CSS) |
 
-## Notes
+## Limitations and next steps
 
-- Any logged-in student can change the status of any issue. There is no admin role in this first version.
+- No real authentication yet: the backend does not check who is calling it, so anyone can create issues or change statuses by calling the API directly. The sign-in redirect is a browser-side check only.
+- - Login doesn't use tokens or sessions. The profile endpoint takes `user_id` in the URL (`/me?user_id=1`), so anyone could view another user's profile by changing the number.
 - Passwords are stored hashed (bcrypt), never as plain text.
+- SQLite on free hosting may reset when the server restarts.
+- Ideas for next: JWT login, admin role, image upload for issues.
